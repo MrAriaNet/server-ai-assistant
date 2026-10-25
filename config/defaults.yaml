@@ -1,0 +1,105 @@
+# Server AI Assistant — default thresholds and paths
+severity_exit_threshold: high  # exit 1 if any finding at or above this level
+
+thresholds:
+  disk_usage_percent: 85
+  inode_usage_percent: 85
+  memory_usage_percent: 90
+  load_per_cpu: 2.0
+  swap_usage_percent: 50
+  ssl_expiry_warn_days: 30
+  ssl_expiry_crit_days: 7
+  log_file_warn_mb: 500
+  backup_max_age_hours: 48
+
+paths:
+  backup_dir: /var/backups/sai
+  log_dir: /var/log/sai
+  cache_dir: /var/cache/sai
+  fleet_file: /etc/sai/fleet.yaml
+  ssh_dropin: /etc/ssh/sshd_config.d/99-sai.conf
+  sysctl_dropin: /etc/sysctl.d/99-sai.conf
+
+# Optional alerting (also overridable via CLI flags)
+alerts:
+  enabled: false
+  min_severity: high
+  webhook_url: ""          # generic JSON POST
+  slack_webhook_url: ""    # Slack incoming webhook
+
+modules:
+  - system
+  - updates
+  - security
+  - users
+  - ssl
+  - web
+  - database
+  - mail
+  - network
+  - containers
+  - hosting
+  - logs
+  - storage
+  - services
+  - backups
+  - proxy
+
+# Named profiles for focused audits
+profiles:
+  quick:
+    - system
+    - updates
+    - security
+    - services
+  security:
+    - security
+    - users
+    - ssl
+    - network
+  webstack:
+    - web
+    - ssl
+    - database
+    - proxy
+    - logs
+  hosting:
+    - hosting
+    - web
+    - database
+    - ssl
+    - backups
+    - users
+    - security
+  cis:
+    - security
+    - users
+    - updates
+    - network
+    - storage
+    - ssl
+    - services
+
+security_recommendations:
+  ssh:
+    PermitRootLogin: "no"
+    PasswordAuthentication: "no"
+    MaxAuthTries: "3"
+    ClientAliveInterval: "300"
+    ClientAliveCountMax: "2"
+    X11Forwarding: "no"
+  sysctl:
+    net.ipv4.tcp_syncookies: "1"
+    net.ipv4.conf.all.rp_filter: "1"
+    net.ipv4.conf.default.rp_filter: "1"
+    net.ipv4.conf.all.accept_redirects: "0"
+    net.ipv4.conf.default.accept_redirects: "0"
+    net.ipv4.conf.all.send_redirects: "0"
+    net.ipv6.conf.all.accept_redirects: "0"
+
+database_public_ports:
+  - 3306
+  - 5432
+  - 6379
+  - 27017
+  - 11211

@@ -1,0 +1,1 @@
+"""Hosting control panel detection."""

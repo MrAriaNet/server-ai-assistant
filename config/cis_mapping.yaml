@@ -1,0 +1,129 @@
+# Approximate CIS Benchmark control mappings for SAI finding IDs / prefixes.
+# References: CIS Ubuntu Linux / CIS Red Hat Enterprise Linux (illustrative IDs).
+# Format: finding_id_prefix -> list of CIS control IDs + titles
+
+mappings:
+  security.ssh.PermitRootLogin:
+    - id: "5.2.10"
+      title: "Ensure SSH root login is disabled"
+  security.ssh.PasswordAuthentication:
+    - id: "5.2.7"
+      title: "Ensure SSH password authentication is disabled"
+  security.ssh.MaxAuthTries:
+    - id: "5.2.5"
+      title: "Ensure SSH MaxAuthTries is set to 4 or less"
+  security.ssh.X11Forwarding:
+    - id: "5.2.6"
+      title: "Ensure SSH X11 forwarding is disabled"
+  security.ssh.ClientAliveInterval:
+    - id: "5.2.13"
+      title: "Ensure SSH idle timeout is configured"
+  security.ssh.ok:
+    - id: "5.2"
+      title: "SSH server configuration"
+  security.firewall:
+    - id: "3.5"
+      title: "Firewall configuration"
+  security.fail2ban:
+    - id: "4.2"
+      title: "Configure logging / intrusion prevention (related)"
+  security.sysctl:
+    - id: "3.3"
+      title: "Network parameters (host only)"
+  security.world_writable:
+    - id: "6.1"
+      title: "System file permissions"
+  security.empty_passwords:
+    - id: "5.4.1"
+      title: "Password quality / empty passwords"
+  security.selinux:
+    - id: "1.6"
+      title: "Mandatory Access Control (SELinux)"
+  security.apparmor:
+    - id: "1.6"
+      title: "Mandatory Access Control (AppArmor)"
+  security.auditd:
+    - id: "4.1"
+      title: "Configure system accounting (auditd)"
+  updates.security:
+    - id: "1.9"
+      title: "Ensure updates / patches are applied"
+  updates.pending:
+    - id: "1.9"
+      title: "Ensure updates / patches are applied"
+  updates.unattended:
+    - id: "1.9"
+      title: "Ensure updates are applied automatically (related)"
+  updates.dnf_automatic:
+    - id: "1.9"
+      title: "Ensure updates are applied automatically (related)"
+  users.uid0:
+    - id: "5.4.2"
+      title: "Ensure root is the only UID 0 account"
+  users.sudo_nopasswd:
+    - id: "5.3"
+      title: "Configure sudo"
+  users.ssh_dir_perms:
+    - id: "5.2"
+      title: "SSH user configuration / permissions"
+  users.password_aging:
+    - id: "5.4.1"
+      title: "Password aging"
+  ssl.expired:
+    - id: "5.2"
+      title: "Cryptography / TLS certificates (related)"
+  ssl.expiring:
+    - id: "5.2"
+      title: "Cryptography / TLS certificates (related)"
+  database.mysql.bind:
+    - id: "3.5"
+      title: "Firewall / network exposure of services"
+  database.redis.bind:
+    - id: "3.5"
+      title: "Firewall / network exposure of services"
+  database.postgres.listen:
+    - id: "3.5"
+      title: "Firewall / network exposure of services"
+  database.mongo.bind:
+    - id: "3.5"
+      title: "Firewall / network exposure of services"
+  database.port_public:
+    - id: "3.5"
+      title: "Firewall / network exposure of services"
+  network.public:
+    - id: "3.5"
+      title: "Firewall configuration"
+  network.ip_forward:
+    - id: "3.3.1"
+      title: "Disable IP forwarding (if not a router)"
+  storage.tmp_sticky:
+    - id: "1.1.21"
+      title: "Ensure sticky bit is set on all world-writable directories"
+  web.nginx.server_tokens:
+    - id: "2.2"
+      title: "Special purpose services / info disclosure (related)"
+  web.apache.servertokens:
+    - id: "2.2"
+      title: "Special purpose services / info disclosure (related)"
+  web.nginx.ssl_protocols:
+    - id: "5.2"
+      title: "Cryptography — disable weak protocols"
+  logs.oom:
+    - id: "4.2"
+      title: "Logging and auditing (ops signal)"
+  services.failed:
+    - id: "4.2"
+      title: "Ensure services are healthy (ops signal)"
+  backups.stale:
+    - id: "1.1"
+      title: "Filesystem / backup hygiene (related)"
+
+# Profiles that map closely to CIS-oriented audits
+cis_profile_modules:
+  - security
+  - users
+  - updates
+  - network
+  - storage
+  - ssl
+  - services

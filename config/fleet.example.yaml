@@ -1,0 +1,20 @@
+# Example multi-host fleet file for: sai fleet audit -f config/fleet.example.yaml
+# Requires: SSH key auth (BatchMode), and `sai` installed on each remote host.
+
+hosts:
+  - name: web-01
+    host: 10.0.0.11
+    user: root
+    port: 22
+    groups: [web, production]
+    # key: /root/.ssh/id_ed25519
+
+  - name: db-01
+    host: 10.0.0.21
+    user: root
+    port: 22
+    groups: [database, production]
+
+# Or use a simple hosts.txt:
+#   root@10.0.0.11
+#   root@10.0.0.21:22
